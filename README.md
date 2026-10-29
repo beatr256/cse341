@@ -37,8 +37,11 @@ with `{"message":"Internal server error"}`.
 ## Render deployment
 
 Create a Render Web Service connected to this GitHub repository. Set the build
-command to `npm install` and start command to `npm start`. Add `MONGODB_URI`,
-`MONGODB_DB` (`cse341-books-db`), and optionally `PORT` as Render environment
-variables. Run `npm run seed` locally against the production database before
-testing the deployed endpoints. Verify `/`, `/books`, an existing book ID, and
-a missing ID. Record the deployed URL here after deployment.
+command to `npm install` and start command to `node server.js`. Add
+`MONGODB_URI`, `MONGODB_DB` (`cse341-books-db`), and optionally `PORT` as Render
+environment variables. The Render start command must not use `--env-file=.env`;
+Render supplies configured environment variables directly.
+
+Run `npm run seed` locally against the production database before testing the
+deployed endpoints. Verify `/`, `/books`, an existing book ID, and a missing ID.
+Record the deployed URL here after deployment.
