@@ -19,9 +19,11 @@ const seedDatabase = async () => {
     await client.connect();
     const collection = client.db(MONGODB_DB_NAME).collection("books");
     await collection.createIndex({ id: 1 }, { unique: true });
-    await collection.bulkWrite(books.map((book) => ({
-      replaceOne: { filter: { id: book.id }, replacement: book, upsert: true }
-    })));
+    await collection.bulkWrite(books.map((book) => {
+      return {
+        replaceOne: { filter: { id: book.id }, replacement: book, upsert: true }
+      };
+    }));
     console.log("Seeded the books collection.");
   } finally {
     await client.close();
