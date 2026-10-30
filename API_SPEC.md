@@ -40,7 +40,7 @@ details that needed clarification:
 
 - **Behavior and short-sighted decisions:** The draft did not define required
   fields, the date format, database name, or connection configuration. It also
-did not say whether list ordering is predictable or whether MongoDB's
+  did not say whether list ordering is predictable or whether MongoDB's
   internal `_id` appears in responses.
 - **Security:** Returning database errors or stack traces to clients could
   expose internal implementation details. The API should return a safe generic
