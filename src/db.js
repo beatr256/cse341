@@ -14,6 +14,10 @@ export const connectToDatabase = async () => {
   try {
     await client.connect();
     database = client.db(MONGODB_DB_NAME);
+    await Promise.all([
+      database.collection("books").createIndex({ id: 1 }, { unique: true }),
+      database.collection("authors").createIndex({ id: 1 }, { unique: true })
+    ]);
     return database;
   } catch (error) {
     await client.close();
