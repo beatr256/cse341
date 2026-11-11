@@ -34,7 +34,7 @@ export const createAuthorsModel = (getDatabaseProvider = getDatabase) => {return
   },
 
   createAuthor: async (author) => {
-    return getDatabaseProvider().collection("authors").insertOne(author);
+    return getDatabaseProvider().collection("authors").insertOne({ ...author });
   },
 
   updateAuthor: async (id, updatedFields) => {
