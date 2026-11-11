@@ -40,7 +40,8 @@ class MemoryCollection {
       throw error;
     }
 
-    this.documents.push({ ...document, _id: `internal-${document.id}` });
+    document._id = `internal-${document.id}`;
+    this.documents.push({ ...document });
     return { insertedId: `internal-${document.id}` };
   }
 
@@ -114,6 +115,7 @@ test("book creation validates required fields and author references", async () =
   await handlers.createBook({ body: { ...book, id: "b2" } }, created);
   assert.equal(created.statusCode, 201);
   assert.deepEqual(created.body, { ...book, id: "b2" });
+  assert.equal(created.body._id, undefined);
 
   const invalidDate = response();
   await handlers.createBook({
@@ -212,6 +214,7 @@ test("author CRUD validates inputs and protects referenced authors", async () =>
     body: { id: "a2", name: "Jordan Lee", birthYear: 1975 }
   }, created);
   assert.equal(created.statusCode, 201);
+  assert.equal(created.body._id, undefined);
 
   const deleted = response();
   await handlers.deleteAuthor({ params: { id: "a2" } }, deleted);

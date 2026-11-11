@@ -18,7 +18,7 @@ export const createBooksModel = (getDatabaseProvider = getDatabase) => {return {
   },
 
   createBook: async (book) => {
-    return getDatabaseProvider().collection("books").insertOne(book);
+    return getDatabaseProvider().collection("books").insertOne({ ...book });
   },
 
   updateBook: async (id, updatedFields) => {
